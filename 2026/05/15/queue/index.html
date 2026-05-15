@@ -19,21 +19,22 @@
   <meta name="author" content="Astrid">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="队列P1 顺序队列一、 类定义队头固定：浪费时间队头不固定：浪费空间顺序循环队列才是最优解 注意：ppt中队首指向第一个元素之前的位置，不能储存元素,是为了区分“空” “满”。队尾指向最后一个元素。 元素入列：rear &#x3D; (rear + 1)%maxsize元素出列：front &#x3D; (front + 1)%maxsize判满：rear和front相邻，环状，front在rea">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2026/05/14/hello-world/index.html">
+<meta property="og:title" content="queue">
+<meta property="og:url" content="http://example.com/2026/05/15/queue/index.html">
 <meta property="og:site_name" content="blog of a student">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="队列P1 顺序队列一、 类定义队头固定：浪费时间队头不固定：浪费空间顺序循环队列才是最优解 注意：ppt中队首指向第一个元素之前的位置，不能储存元素,是为了区分“空” “满”。队尾指向最后一个元素。 元素入列：rear &#x3D; (rear + 1)%maxsize元素出列：front &#x3D; (front + 1)%maxsize判满：rear和front相邻，环状，front在rea">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-05-14T10:31:01.273Z">
-<meta property="article:modified_time" content="2026-05-13T13:48:48.272Z">
+<meta property="article:published_time" content="2026-05-15T09:04:55.000Z">
+<meta property="article:modified_time" content="2026-05-15T09:06:29.426Z">
 <meta property="article:author" content="Astrid">
+<meta property="article:tag" content="ds">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - blog of a student</title>
+  <title>queue - blog of a student</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -302,7 +303,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="queue"></span>
           
         </div>
 
@@ -313,8 +314,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-14 18:31" pubdate>
-          2026年5月14日 晚上
+        <time datetime="2026-05-15 17:04" pubdate>
+          2026年5月15日 下午
         </time>
       </span>
     
@@ -325,7 +326,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          3k 字
         
       </span>
     
@@ -336,7 +337,7 @@
         
         
         
-          4 分钟
+          25 分钟
         
       </span>
     
@@ -375,24 +376,116 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello World</h1>
+            <h1 id="seo-header">queue</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><h2 id="P1-顺序队列"><a href="#P1-顺序队列" class="headerlink" title="P1 顺序队列"></a>P1 顺序队列</h2><h3 id="一、-类定义"><a href="#一、-类定义" class="headerlink" title="一、 类定义"></a>一、 类定义</h3><p>队头固定：浪费时间<br>队头不固定：浪费空间<br><strong>顺序循环队列</strong>才是最优解</p>
+<p>注意：ppt中队首指向第一个元素之前的位置，<strong>不能</strong>储存元素,是为了区分“空” “满”。队尾指向最后一个元素。</p>
+<p>元素入列：rear &#x3D; (rear + 1)%maxsize<br>元素出列：front &#x3D; (front + 1)%maxsize<br><strong>判满</strong>：rear和front相邻，环状，front在rear下游（自己画个图就懂了），故front &#x3D; (rear + 1)%maxsize<br><strong>判空</strong>：rear &#x3D;&#x3D; front</p>
+<details>
+<summary>想不起来了再看吧🔍</summary>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">seqQueue</span>&#123;<br><span class="hljs-keyword">private</span>:<br>    elemType *elem;<br>    <span class="hljs-type">int</span> front,rear;<br>    <span class="hljs-type">int</span> maxsize;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">doubleSpace</span><span class="hljs-params">()</span></span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">seqQueue</span>(<span class="hljs-type">int</span> size = <span class="hljs-number">10</span>);<br>    ~<span class="hljs-built_in">seqQueue</span>();<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">enQueue</span><span class="hljs-params">(<span class="hljs-type">const</span> elemtype&amp;x)</span></span>;<br>    <span class="hljs-function">elemType <span class="hljs-title">deQueue</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function">elemType <span class="hljs-title">getHead</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+</details>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
+<h3 id="二、函数实现"><a href="#二、函数实现" class="headerlink" title="二、函数实现"></a>二、函数实现</h3><ol>
+<li><p>构造函数</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br>seqQueue&lt;elemType&gt;::<span class="hljs-built_in">seqQueue</span>(<span class="hljs-type">int</span> size) &#123;<br>    elem = <span class="hljs-keyword">new</span> elemType[size]; <span class="hljs-comment">// 分配存储空间</span><br>    maxSize = size;            <span class="hljs-comment">// 设置最大容量</span><br>    front = rear = <span class="hljs-number">0</span>;          <span class="hljs-comment">// 初始化头尾指针</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+</details></li>
+<li><p>析构函数</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br>seqQueue&lt;elemType&gt;::~<span class="hljs-built_in">seqQueue</span>() &#123;<br>    <span class="hljs-keyword">delete</span>[] elem;             <span class="hljs-comment">// 释放存储空间</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+<li><p>判空</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br><span class="hljs-type">bool</span> seqQueue&lt;elemType&gt;::<span class="hljs-built_in">isEmpty</span>() <span class="hljs-type">const</span> &#123;<br>    <span class="hljs-keyword">return</span> front == rear;      <span class="hljs-comment">// 如果头尾指针相等，队列为空</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+<li><p>扩容<br><strong>易错点：</strong> elem是最后扩容的数组。复制元素的时候想清楚。</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br><span class="hljs-type">void</span> seqQueue&lt;elemType&gt;::<span class="hljs-built_in">doubleSpace</span>()<br>&#123;<br>    elemType *tmp = elem; <span class="hljs-comment">// 保存当前的elem指针</span><br>    elem = <span class="hljs-keyword">new</span> elemType[<span class="hljs-number">2</span> * maxSize]; <span class="hljs-comment">// 创建一个新的更大的数组</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= maxSize; ++i)<br>        elem[i] = tmp[(front + i) % maxSize]; <span class="hljs-comment">// 将原队列中的元素复制到新数组</span><br>    front = <span class="hljs-number">0</span>; <span class="hljs-comment">// 重置front指针</span><br>    rear = maxSize; <span class="hljs-comment">// 重置rear指针</span><br>    maxSize *= <span class="hljs-number">2</span>; <span class="hljs-comment">// 更新队列的最大容量</span><br>    <span class="hljs-keyword">delete</span> tmp; <span class="hljs-comment">// 释放原来的数组</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details>
+</li>
+<li><p>进队<br>判满。更新尾指针。插入元素。</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemtype</span>&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">enQueue</span> <span class="hljs-params">(<span class="hljs-type">const</span> elemType&amp;x)</span></span>&#123;<br> <span class="hljs-keyword">if</span>(front == (rear<span class="hljs-number">+1</span>)%maxsize) <span class="hljs-built_in">doubleSpace</span>();<br> rear = (rear<span class="hljs-number">+1</span>)%maxsize;<br> elem[rear] = x;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+<li><p>出队，获得队首元素。</p>
+</li>
+</ol>
+<h2 id="P2-链式队列"><a href="#P2-链式队列" class="headerlink" title="P2 链式队列"></a>P2 链式队列</h2><h3 id="一、类定义"><a href="#一、类定义" class="headerlink" title="一、类定义"></a>一、类定义</h3><p>单链表，头指针和尾指针，队列不会满，头尾指针相等时即为空。<br>按ppt来，类的private部分定义一个节点的结构体。</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">linkQueue</span><br>&#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123; <span class="hljs-comment">// 定义链表节点结构体</span><br>        elemType data; <span class="hljs-comment">// 节点存储的数据</span><br>        node *next;    <span class="hljs-comment">// 指向下一个节点的指针</span><br>        <span class="hljs-built_in">node</span>(<span class="hljs-type">const</span> elemType &amp;x, node *N = <span class="hljs-literal">NULL</span>) : <span class="hljs-built_in">data</span>(x), <span class="hljs-built_in">next</span>(N) &#123;&#125; <span class="hljs-comment">// 带参数构造函数，初始化数据和指针</span><br>        <span class="hljs-built_in">node</span>() : <span class="hljs-built_in">next</span>(<span class="hljs-literal">NULL</span>) &#123;&#125; <span class="hljs-comment">// 默认构造函数，将next初始化为NULL</span><br>        ~<span class="hljs-built_in">node</span>() &#123;&#125; <span class="hljs-comment">// 析构函数</span><br>    &#125;;<br>    node *front, *rear; <span class="hljs-comment">// 队列的头尾指针</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">linkQueue</span>(); <span class="hljs-comment">// 构造函数</span><br>    ~<span class="hljs-built_in">linkQueue</span>(); <span class="hljs-comment">// 析构函数</span><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>; <span class="hljs-comment">// 判断队列是否为空</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">enQueue</span><span class="hljs-params">(<span class="hljs-type">const</span> elemType &amp;x)</span></span>; <span class="hljs-comment">// 入队操作</span><br>    <span class="hljs-function">elemType <span class="hljs-title">deQueue</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 出队操作</span><br>    <span class="hljs-function">elemType <span class="hljs-title">getHead</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>; <span class="hljs-comment">// 获取队头元素</span><br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+</details>
+
+<h3 id="二、函数实现-1"><a href="#二、函数实现-1" class="headerlink" title="二、函数实现"></a>二、函数实现</h3><ol>
+<li><p>构造函数</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">linkQueue &lt;elemType&gt;::<span class="hljs-built_in">linkQueue</span>()&#123;<br> front = rear = <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+<li><p>析构函数</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">linkQueue&lt;elemType&gt;::~<span class="hljs-built_in">linkQueue</span>()&#123;<br> node*tmp;<br> <span class="hljs-keyword">while</span>(front != <span class="hljs-literal">NULL</span>)&#123;<br>     tmp = front;<br>     front = front-&gt;next;<br>     <span class="hljs-keyword">delete</span> tmp;<br> &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+<li><p>判空</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">bool</span> linkQueue&lt;elemType&gt;::<span class="hljs-built_in">isEmpty</span>() <span class="hljs-type">const</span> &#123;<br>    <span class="hljs-keyword">return</span> front == <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details>
+</li>
+<li><p>获取队列头部元素</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">elemType</span>&gt;<br>elemType linkQueue&lt;elemType&gt;::<span class="hljs-built_in">getHead</span>() <span class="hljs-type">const</span> &#123;<br>    <span class="hljs-keyword">return</span> front-&gt;data;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details>
+</li>
+<li><p>入队</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">void</span> linkQueue&lt;elemType&gt;::<span class="hljs-built_in">enQueue</span>(<span class="hljs-type">const</span> elemType &amp;x) &#123;<br>    <span class="hljs-keyword">if</span> (rear == <span class="hljs-literal">NULL</span>) &#123; <span class="hljs-comment">// 入队前为空队列</span><br>        front = rear = <span class="hljs-keyword">new</span> <span class="hljs-built_in">node</span>(x);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        rear = rear-&gt;next = <span class="hljs-keyword">new</span> <span class="hljs-built_in">node</span>(x);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details>
+</li>
+<li><p><strong>出队  要考虑出队后变成空队列的情况，先把rear改成NULL，再删除tmp</strong></p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">elemType linkQueue&lt;elemType&gt;::<span class="hljs-built_in">deQueue</span>() &#123;<br>    node *tmp = front;<br>    elemType value = front-&gt;data;<br>    front = front-&gt;next;<br>    <span class="hljs-keyword">if</span> (front == <span class="hljs-literal">NULL</span>) rear = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 出队后为空队列</span><br>    <span class="hljs-keyword">delete</span> tmp;<br>    <span class="hljs-keyword">return</span> value;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details></li>
+</ol>
 
                 
               </div>
@@ -401,6 +494,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/datastructure/" class="category-chain-item">datastructure</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ds/" class="print-no-link">#ds</a>
+      
+    </div>
   
 </div>
 
@@ -410,8 +531,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2026/05/14/hello-world/</div>
+      <div>queue</div>
+      <div>http://example.com/2026/05/15/queue/</div>
     </div>
     <div class="license-meta">
       
@@ -423,7 +544,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年5月14日</div>
+          <div>2026年5月15日</div>
         </div>
       
       
@@ -455,15 +576,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/15/queue/" title="queue">
+                      <a href="/2026/05/15/stack/" title="stack">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">queue</span>
+                        <span class="hidden-mobile">stack</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2026/05/14/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
