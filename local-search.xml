@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>graph</title>
+    <link href="/2026/05/15/graph/"/>
+    <url>/2026/05/15/graph/</url>
+    
+    <content type="html"><![CDATA[<h1 id="定义-概念"><a href="#定义-概念" class="headerlink" title="定义&#x2F;概念"></a>定义&#x2F;概念</h1><p>顶点 边<br>有向图 用&lt;&gt; 无向图 用()<br>临接关系 两点之间有一条边相连<br>度：出度，入度</p><p>无向完全图：任意两点之间都有边相连。此时边的数目最多，n*(n-)&#x2F;2<br>有向完全图</p><p>权重 加权有向图、加权无向图。加权图都称为网络。</p><p>路径 路径长度 p.s.若有权重，路径上所有边的权重之和 &#x3D;&#x3D; 路径长度</p><p>子图</p><p>连通 连通图 连通分量（无向图的极大连通子图）<br>强连通图：任意两点之间连通</p><h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><h2 id="基于数组-邻接矩阵"><a href="#基于数组-邻接矩阵" class="headerlink" title="基于数组-&gt; 邻接矩阵"></a>基于数组-&gt; 邻接矩阵</h2><h3 id="基础讲解"><a href="#基础讲解" class="headerlink" title="基础讲解"></a>基础讲解</h3><p>有向图中某一点的入度 &#x3D;&#x3D; 某一行的1的个数<br>有向图中某一点的出度 &#x3D;&#x3D; 某一列的1的个数<br>无向图中某一点的度 &#x3D;&#x3D; 某一行&#x2F;某一列的1的个数</p><p>存储无向图可以只存上&#x2F;下三角矩阵（对角线也能不存，都是0）</p><p>加权邻接矩阵；如果两点之间没有边，写成无穷，对角线还是写0.两点之间有边，考虑权值的时候，理解为路径长度。</p><p>缺点：需要n**2的存储空间</p><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol><li>类定义<details><summary>点击查看代码</summary> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 你的C++代码</span><br></code></pre></td></tr></table></figure></details></li></ol><h2 id="基于链表-邻接表"><a href="#基于链表-邻接表" class="headerlink" title="基于链表-&gt; 邻接表"></a>基于链表-&gt; 邻接表</h2><p>顶点表，边表</p><h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><p>有一个visit量用于记录某个点被访问的次数</p><h2 id="DFS（深度优先搜索）"><a href="#DFS（深度优先搜索）" class="headerlink" title="DFS（深度优先搜索）"></a>DFS（深度优先搜索）</h2><p>随机选一个作为起点<br>访问，给这个点加标志</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>datastructure</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ds</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>tree</title>
     <link href="/2026/05/15/tree/"/>
     <url>/2026/05/15/tree/</url>
@@ -73,19 +98,6 @@
       <tag>ds</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2026/05/14/hello-world/"/>
-    <url>/2026/05/14/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
     
   </entry>
   
