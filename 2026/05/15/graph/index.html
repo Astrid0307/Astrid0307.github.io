@@ -21,7 +21,7 @@
   
     <meta name="description" content="定义&#x2F;概念顶点 边有向图 用&lt;&gt; 无向图 用()临接关系 两点之间有一条边相连度：出度，入度 无向完全图：任意两点之间都有边相连。此时边的数目最多，n*(n-)&#x2F;2有向完全图 权重 加权有向图、加权无向图。加权图都称为网络。 路径 路径长度 p.s.若有权重，路径上所有边的权重之和 &#x3D;&#x3D; 路径长度 子图 连通 连通图 连通分量（无向图的极大连通子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="graph 1">
+<meta property="og:title" content="graph 1 存储，遍历">
 <meta property="og:url" content="http://example.com/2026/05/15/graph/index.html">
 <meta property="og:site_name" content="sxy&#39;s blog">
 <meta property="og:description" content="定义&#x2F;概念顶点 边有向图 用&lt;&gt; 无向图 用()临接关系 两点之间有一条边相连度：出度，入度 无向完全图：任意两点之间都有边相连。此时边的数目最多，n*(n-)&#x2F;2有向完全图 权重 加权有向图、加权无向图。加权图都称为网络。 路径 路径长度 p.s.若有权重，路径上所有边的权重之和 &#x3D;&#x3D; 路径长度 子图 连通 连通图 连通分量（无向图的极大连通子">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/img/ds_graph/delete_f.jpg">
 <meta property="og:image" content="http://example.com/img/ds_graph/%E5%88%A0%E5%8E%BB%E6%8C%87%E5%90%91%E7%9B%AE%E6%A0%87%E7%82%B9%E7%9A%84%E9%82%BB%E6%8E%A5%E8%BE%B9.png">
 <meta property="article:published_time" content="2026-05-15T10:23:59.000Z">
-<meta property="article:modified_time" content="2026-05-18T04:56:13.383Z">
+<meta property="article:modified_time" content="2026-06-15T04:58:16.303Z">
 <meta property="article:author" content="Astrid">
 <meta property="article:tag" content="ds">
 <meta name="twitter:card" content="summary_large_image">
@@ -39,7 +39,7 @@
   
   
   
-  <title>graph 1 - sxy&#39;s blog</title>
+  <title>graph 1 存储，遍历 - sxy&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -308,7 +308,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="graph 1"></span>
+            <span id="subtitle" data-typed-text="graph 1 存储，遍历"></span>
           
         </div>
 
@@ -331,7 +331,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.1k 字
+          7.8k 字
         
       </span>
     
@@ -342,7 +342,7 @@
         
         
         
-          59 分钟
+          65 分钟
         
       </span>
     
@@ -381,7 +381,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">graph 1</h1>
+            <h1 id="seo-header">graph 1 存储，遍历</h1>
             
             
               <div class="markdown-body">
@@ -480,6 +480,24 @@
 <p>补充：<strong>多重邻接链表</strong>，每个边只存一次   <strong>十字链表</strong>，结合了邻接表与逆邻接表，有向图中方便计算出度和入度</p>
 <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><p>有一个visit量用于记录某个点被访问的次数</p>
 <h2 id="DFS（深度优先搜索）"><a href="#DFS（深度优先搜索）" class="headerlink" title="DFS（深度优先搜索）"></a>DFS（深度优先搜索）</h2><p>随机选一个作为起点<br>访问，给这个点加标志</p>
+<p><strong>递归</strong>：代码部分需要写两个函数，类似于cs61a中辅助函数的思想<br>复杂度 O(n+e)</p>
+<details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">verType</span>,<span class="hljs-keyword">class</span> <span class="hljs-title class_">eType</span>&gt;<br><span class="hljs-type">void</span> graph&lt;verType,eType&gt;::<span class="hljs-built_in">DFS</span>(<span class="hljs-type">int</span> start, <span class="hljs-type">bool</span> visted[])&#123;<br>    eNode&lt;verType,eType&gt;* p;<br>    cout &lt;&lt; verlist[start].dest &lt;&lt; endl;<br>    visted[start] = <span class="hljs-literal">true</span>;<br>    p = verlist[start].adj;<br>    <span class="hljs-keyword">while</span>(p)&#123;<br>        <span class="hljs-keyword">if</span>(!visted[p-&gt;dest])&#123;<br>            <span class="hljs-built_in">DFS</span>(p-&gt;dest,visted);<br>        &#125;<br>        p = p-&gt;link;<br>    &#125;    <br>&#125;<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">verType</span>,<span class="hljs-keyword">class</span> <span class="hljs-title class_">eType</span>&gt;<br><span class="hljs-type">void</span> graph&lt;verType,eType&gt;::<span class="hljs-built_in">DFS</span>()&#123;<br>    <span class="hljs-type">bool</span>* visted;<br>    <span class="hljs-type">int</span> i;<br>    visted = <span class="hljs-keyword">new</span> <span class="hljs-type">bool</span> [vnum];<br>    <span class="hljs-keyword">if</span>(!visted) <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; vnum; i++)&#123;<br>        visted[i] = <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; vnum;i++)&#123;<br>        <span class="hljs-keyword">if</span>(!visted[i])&#123;<br>            <span class="hljs-built_in">DFS</span>(i,visted);<br>            cout &lt;&lt; endl;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</details>
+
+<p><strong>非递归</strong>:类似于二叉树的前序遍历</p>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><details>
+<summary>点击查看代码</summary>
+ 
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 你的C++代码</span><br></code></pre></td></tr></table></figure>
+
+</details>
+
+
+
 
                 
               </div>
@@ -525,7 +543,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>graph 1</div>
+      <div>graph 1 存储，遍历</div>
       <div>http://example.com/2026/05/15/graph/</div>
     </div>
     <div class="license-meta">
@@ -569,6 +587,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/05/18/%E6%9F%A5%E6%89%BE/" title="查找">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">查找</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
